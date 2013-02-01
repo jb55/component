@@ -152,6 +152,7 @@ var buildables = ["js", "css"]
         b.push(builder.buildScripts.bind(builder))
         b.push(builder.buildAliases.bind(builder))
         b.end(function(err, res){
+          if (err) throw err;
           var js = res.shift() + '\n' + res.shift() + '\n' + builder._js;
           buildScripts(err, js, fn);
         });
