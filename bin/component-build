@@ -22,6 +22,7 @@ program
   .option('-s, --standalone <name>', 'build a stand-alone version of the component')
   .option('-o, --out <dir>', 'output directory defaulting to ./build', 'build')
   .option('-n, --name <file>', 'base name for build files defaulting to build', 'build')
+  .option('-f, --fileName <file>', 'output filename, works best with -c and -j')
   .option('-v, --verbose', 'output verbose build information')
   .option('-p, --prefix <str>', 'prefix css asset urls with <str>')
   .option('-c, --css', 'build css')
@@ -57,8 +58,8 @@ var standalone = program.standalone;
 
 // output paths
 
-var jsPath = path.join(program.out, program.name + '.js');
-var cssPath = path.join(program.out, program.name + '.css');
+var jsPath = path.join(program.out, program.fileName || program.name + '.js');
+var cssPath = path.join(program.out, program.fileName || program.name + '.css');
 
 // mkdir -p
 
