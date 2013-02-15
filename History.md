@@ -1,3 +1,20 @@
+
+0.12.0 / 2013-02-15 
+==================
+
+  * add -c, --copy option to copy files instead of symlinking  
+  * fix AMD support for modules exporting functions 
+
+0.11.1 / 2013-02-01
+==================
+
+  * add component link to component-create(1) template
+  * add `make test-remotes`
+  * add correct version of dependency to component.json when installing
+  * update builder
+  * remove term-css dep
+  * fix ability to install dependencies from remote repos
+
 0.11.0 / 2012-12-30
 ==================
 

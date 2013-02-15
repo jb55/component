@@ -25,8 +25,9 @@ program
   .option('-f, --fileName <file>', 'output filename, works best with -c and -j')
   .option('-v, --verbose', 'output verbose build information')
   .option('-p, --prefix <str>', 'prefix css asset urls with <str>')
-  .option('-c, --css', 'build css')
-  .option('-j, --js', 'build js')
+  .option('--css', 'build css')
+  .option('--js', 'build js')
+  .option('-c, --copy', 'copy files instead of linking')
 
 // examples
 
@@ -68,6 +69,7 @@ mkdir.sync(program.out);
 // build
 
 var builder = new Builder(process.cwd());
+if (program.copy) builder.copyFiles();
 builder.copyAssetsTo(program.out);
 if (program.dev) builder.prefixUrls('./');
 if (program.prefix) builder.prefixUrls(program.prefix);
@@ -104,7 +106,7 @@ function buildScripts(err, js, fn){
       'if (typeof exports == "object") {',
       '  module.exports = require("' + conf.name + '");',
       '} else if (typeof define == "function" && define.amd) {',
-      '  define(require("' + conf.name + '"));',
+      '  define(function(){ return require("' + conf.name + '"); });',
       '} else {',
       '  window["' + name + '"] = require("' + conf.name + '");',
       '}'
