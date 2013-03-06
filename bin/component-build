@@ -13,6 +13,7 @@ var program = require('commander')
   , log = component.utils.log
   , path = require('path')
   , fs = require('fs')
+  , exists = fs.existsSync || path.existsSync
   , mkdir = require('mkdirp');
 
 // options
@@ -28,6 +29,7 @@ program
   .option('--css', 'build css')
   .option('--js', 'build js')
   .option('-c, --copy', 'copy files instead of linking')
+  .option('-u, --use <name>', 'use the given build plugin(s)')
 
 // examples
 
@@ -42,6 +44,9 @@ program.on('--help', function(){
   console.log();
   console.log('    # build standalone as window.$');
   console.log('    $ component build --standalone $');
+  console.log();
+  console.log('    # build with plugins');
+  console.log('    $ component build -u foo,bar,baz');
   console.log();
 });
 
@@ -77,6 +82,18 @@ if (program.prefix) builder.prefixUrls(program.prefix);
 // lookup paths
 
 if (conf.paths) builder.addLookup(conf.paths);
+
+// require middleware plugins
+if (program.use) {
+  var modules = program.use.split(',');
+  modules.forEach(function(mod){
+    var resolved = path.resolve(mod)
+      , real = exists(resolved) || exists(resolved + '.js')
+      , module = path.resolve('node_modules', mod);
+
+    builder.use(real ? require(resolved) : require(module));
+  });
+}
 
 var start = new Date;
 
