@@ -13,13 +13,14 @@ var program = require('commander')
   , error = utils.error
   , url = require('url')
   , path = require('path')
-  , resolve = path.resolve
+  , resolve = path.resolve;
 
 // options
 
 program
   .usage('[name ...]')
   .option('-d, --dev', 'install development dependencies')
+  .option('-r, --remotes <urls>', 'remotes to try installing from')
   .option('-o, --out <dir>', 'output components to the given <dir>')
   .option('-f, --force', 'force installation even if previously installed')
 
@@ -60,6 +61,10 @@ var pkgs = program.args;
 
 var local = 0 == pkgs.length;
 
+// component.json required
+
+if (local && !exists('component.json')) utils.fatal('missing component.json');
+
 // read json
 
 var conf = loadConfig();
@@ -97,12 +102,22 @@ if (!local) {
     pkg = parsePackage(pkg);
     conf.dependencies[pkg.name] = pkg.version || '*';
   });
-  saveConfig();
+
+  if (exists('component.json')) saveConfig();
 }
 
 // implicit remotes
 
 conf.remotes = conf.remotes || [];
+
+// explicit remotes
+
+if (program.remotes) {
+  conf.remotes = program.remotes.split(',').concat(conf.remotes);
+}
+
+// default to github
+
 conf.remotes.push('https://raw.github.com');
 
 // install
@@ -135,11 +150,10 @@ function normalize(deps) {
 
 function report(pkg, options) {
   options = options || {};
+  if (pkg.inFlight) return;
   log('install', pkg.name + '@' + pkg.version);
 
   pkg.on('error', function(err){
-    if (404 != err.status) utils.fatal(err.stack);
-
     if (err.fatal) {
       error(err.message);
       process.exit(1);

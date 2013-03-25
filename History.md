@@ -1,4 +1,20 @@
 
+0.13.1 / 2013-03-19 
+==================
+
+  * update builder
+  * fix component-info(1)
+  * fix: install: do not create component.json if it doesn't exist
+  * fix fatal detection
+  * add explicit remotes using `-r <url>`
+
+0.13.0 / 2013-02-24 
+==================
+
+  * add: only one in-flight request per component (~50% perf increase). Closes #47
+  * add --use flag
+  * remove makefile and .gitignore from component-create local components
+
 0.12.0 / 2013-02-15 
 ==================
 

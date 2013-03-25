@@ -9,6 +9,7 @@ var program = require('commander')
   , path = require('path')
   , resolve = path.resolve
   , join = path.join
+  , utils = component.utils
   , component = require('..');
 
 // usage
@@ -36,6 +37,10 @@ program.parse(process.argv);
 // package
 
 var pkg = program.args.shift();
+
+// required
+
+if (!pkg) utils.fatal('<name> required');
 
 // props
 
