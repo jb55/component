@@ -9,8 +9,8 @@ var program = require('commander')
   , path = require('path')
   , resolve = path.resolve
   , join = path.join
-  , utils = component.utils
-  , component = require('..');
+  , component = require('..')
+  , utils = component.utils;
 
 // usage
 
