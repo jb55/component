@@ -83,10 +83,6 @@ builder.copyAssetsTo(program.out);
 if (program.dev) builder.prefixUrls('./');
 if (program.prefix) builder.prefixUrls(program.prefix);
 
-// lookup paths
-
-if (conf.paths) builder.addLookup(conf.paths);
-
 // require middleware plugins
 if (program.use) {
   var modules = program.use.split(',');
@@ -129,7 +125,7 @@ function buildScripts(err, js, fn){
       '} else if (typeof define == "function" && define.amd) {',
       '  define(function(){ return require("' + conf.name + '"); });',
       '} else {',
-      '  window["' + name + '"] = require("' + conf.name + '");',
+      '  this["' + name + '"] = require("' + conf.name + '");',
       '}'
     ];
 

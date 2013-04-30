@@ -1,4 +1,25 @@
 
+0.15.1 / 2013-04-26 
+==================
+
+  * update builder for root-level main alias fix
+
+0.15.0 / 2013-04-24 
+==================
+
+  * update builder
+
+0.14.0 / 2013-04-23 
+==================
+
+  * add .main to component-create(1) generated component.json for clarity
+  * add component-info(1) tests
+  * add Package#url() default of first remote
+  * remove .addLookup() from component-build(1), now performed in Builder
+  * update builder
+  * fix a call to fn() that should be done()
+  * fix UMD: use "this" instead of window for global
+
 0.13.2 / 2013-03-26 
 ==================
 
