@@ -77,7 +77,6 @@ Commands:
   convert <file ...>      convert html files to js modules
   info <name> [prop]      output json component information
   changes <name>          output changelog contents
-  docs <name>             output readme contents
   wiki                    open the components list wiki page
   build                   build the component
   ls                      list installed components
@@ -199,6 +198,24 @@ does this component have html? yes
   profile or session while developing component, otherwise `./bin/component`
   will have a hard time finding the sub-commands.
 
+## Using private components
+
+  `component(1)` uses [~/.netrc](http://man.cx/netrc(4), like other tools such as [curl](http://man.cx/curl) and [git](http://git-scm.com/), to specify credentials for remote hosts. Simply create a `~/.netrc` file in the home directory:
+
+```
+machine raw.github.com
+  login visionmedia
+  password pass123
+```
+
+  You may also use [GitHub OAuth Tokens](https://help.github.com/articles/creating-an-oauth-token-for-command-line-use) instead of your username and password. If my token were `testing123` my `~/.netrc` file would look like the following:
+
+```
+machine raw.github.com
+  login testing123
+  password x-oauth-basic
+```
+
 ## Running tests
 
 Make sure dependencies are installed:
@@ -228,6 +245,7 @@ $ make test
   - Tim Oxley
   - Jeremy Worboys
   - Nick Jackson
+  - Cameron Bytheway
 
 ## Example applications
 

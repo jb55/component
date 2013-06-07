@@ -21,8 +21,9 @@ program
   .usage('[name ...]')
   .option('-d, --dev', 'install development dependencies')
   .option('-r, --remotes <urls>', 'remotes to try installing from')
-  .option('-o, --out <dir>', 'output components to the given <dir>')
+  .option('-o, --out <dir>', 'output components to the given <dir>', 'components')
   .option('-f, --force', 'force installation even if previously installed')
+  .option('-v, --verbose', 'verbose output')
 
 // examples
 
@@ -97,10 +98,12 @@ if (local) {
 // save to ./component.json
 
 if (!local) {
-  conf.dependencies = conf.dependencies || {};
+  var key = program.dev ? 'development' : 'dependencies';
+
+  conf[key] = conf[key] || {};
   pkgs.forEach(function(pkg){
     pkg = parsePackage(pkg);
-    conf.dependencies[pkg.name] = pkg.version || '*';
+    conf[key][pkg.name] = pkg.version || '*';
   });
 
   if (exists('component.json')) saveConfig();
@@ -158,20 +161,24 @@ function report(pkg, options) {
       error(err.message);
       process.exit(1);
     }
+
+    error(err.message);
   });
 
-  pkg.on('dep', function(dep){
-    log('dep', dep.name + '@' + dep.version);
-    report(dep, options);
-  });
+  if (program.verbose) {
+    pkg.on('dep', function(dep){
+      log('dep', dep.name + '@' + dep.version);
+      report(dep, options);
+    });
 
-  pkg.on('exists', function(dep){
-    log('exists', dep.name + '@' + dep.version);
-  });
+    pkg.on('exists', function(dep){
+      log('exists', dep.name + '@' + dep.version);
+    });
 
-  pkg.on('file', function(file){
-    log('fetch', pkg.name + ':' + file);
-  });
+    pkg.on('file', function(file){
+      log('fetch', pkg.name + ':' + file);
+    });
+  }
 
   pkg.on('end', function(){
     log('complete', pkg.name);
@@ -194,6 +201,8 @@ process.on('exit', function(){
  */
 
 function install(name, version) {
+  touch(program.out);
+
   // kick off installation
   var pkg = component.install(name, version, {
     dest: program.out,
@@ -206,6 +215,21 @@ function install(name, version) {
 
   // TODO: add callback
   pkg.install();
+}
+
+/**
+ * Touch `path` when present.
+ *
+ * @param {String} path
+ * @api private
+ */
+
+function touch(path) {
+  try {
+    fs.utimesSync(path, new Date, new Date);
+  } catch (err) {
+    // ignore
+  }
 }
 
 /**

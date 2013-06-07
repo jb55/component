@@ -1,6 +1,6 @@
 {
   "name": "component",
-  "version": "0.15.1",
+  "version": "0.16.2",
   "description": "Component package manager consuming git repositories",
   "keywords": [
     "component",
@@ -14,13 +14,14 @@
     "commander": "1.0.5",
     "mkdirp": "0.3.4",
     "superagent": "0.10.0",
-    "component-builder": "0.8.1",
+    "component-builder": "0.8.2",
     "string-to-js": "0.0.1",
     "jog": "0.4.0",
     "batch": "0.2.1",
     "win-fork": "1.0.0",
     "archy": "0.0.2",
     "component-require": "0.2.0",
+    "netrc": "~0.1.0",
     "debug": "*"
   },
   "devDependencies": {
@@ -40,8 +41,7 @@
     "component-search": "bin/component-search",
     "component-create": "bin/component-create",
     "component-changes": "bin/component-changes",
-    "component-wiki": "bin/component-wiki",
-    "component-docs": "bin/component-docs"
+    "component-wiki": "bin/component-wiki"
   },
   "main": "index",
   "engines": {

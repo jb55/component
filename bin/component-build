@@ -30,6 +30,8 @@ program
   .option('--js', 'build js')
   .option('-c, --copy', 'copy files instead of linking')
   .option('-u, --use <name>', 'use the given build plugin(s)')
+  .option('-R, --no-require', 'exclude require from build')
+  .option('-v, --verbose', 'verbose output')
 
 // examples
 
