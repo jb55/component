@@ -1,4 +1,59 @@
 
+0.17.3 / 2013-09-06 
+==================
+
+ * update builder (require function change)
+
+0.17.2 / 2013-09-03 
+==================
+
+ * add superagent-proxy
+ * add warning for missing bin
+ * fix: bump version of netrc
+ * fix: keep default gh remote from being added each install command.
+ * fix: wait for packages to install successfully before writing component.json -- Should solve #386
+
+0.17.0 / 2013-07-19 
+==================
+
+ * update builder
+
+0.16.8 / 2013-07-17 
+==================
+
+ * fix dups reported in install output. Closes #372
+ * fix corrupt downloads with quick superagent replacement. Closes #374
+
+0.16.7 / 2013-07-05 
+==================
+
+ * update superagent for unzip fixes
+
+0.16.6 / 2013-07-02 
+==================
+
+ * update superagent
+ * fix node 0.8 issues when installing partial files
+ * remove OAuth in .netrc instructions
+
+0.16.5 / 2013-06-26 
+==================
+
+ * update superagent
+ * fixing resolve bug for node 0.10+
+
+0.16.4 / 2013-06-18 
+==================
+
+ * fix build of empty js files when no js is present
+ * fix installation of local dependencies via lookup paths
+ * fix removal of semi-installed components
+
+0.16.3 / 2013-06-06 
+==================
+
+ * update builder
+
 0.16.2 / 2013-05-31 
 ==================
 

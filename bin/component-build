@@ -4,17 +4,17 @@
  * Module dependencies.
  */
 
+var Batch = require('batch')
+var Builder = require('component-builder');
+var component = require('..');
+var fs = require('fs');
+var mkdir = require('mkdirp');
+var path = require('path')
 var program = require('commander')
-  , Builder = require('component-builder')
-  , requirejs = require('component-require')
-  , Batch = require('batch')
-  , component = require('..')
-  , utils = component.utils
-  , log = component.utils.log
-  , path = require('path')
-  , fs = require('fs')
-  , exists = fs.existsSync || path.existsSync
-  , mkdir = require('mkdirp');
+var requirejs = require('component-require')
+var exists = fs.existsSync || path.existsSync
+var utils = component.utils;
+var log = component.utils.log;
 
 // options
 
@@ -117,7 +117,7 @@ function buildScripts(err, js, fn){
     : conf.name;
 
   if (standalone) out += ';(function(){\n';
-  out += requirejs;
+  if (program.require) out += requirejs;
   out += js;
 
   if (standalone) {

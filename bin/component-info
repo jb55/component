@@ -4,13 +4,13 @@
  * Module dependencies.
  */
 
-var program = require('commander')
-  , fs = require('fs')
-  , path = require('path')
-  , resolve = path.resolve
-  , join = path.join
-  , component = require('..')
-  , utils = component.utils;
+var program = require('commander');
+var fs = require('fs');
+var path = require('path');
+var resolve = path.resolve;
+var join = path.join;
+var component = require('..');
+var utils = component.utils;
 
 // usage
 
