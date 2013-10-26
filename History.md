@@ -1,4 +1,25 @@
 
+0.18.0 / 2013-10-17 
+==================
+
+ * update builder for json support
+
+0.17.6 / 2013-09-17 
+==================
+
+ * revert superagent enabling for now
+ * add use of "open" for component-wiki
+
+0.17.5 / 2013-09-13 
+==================
+
+ * add superagent use back for netrc
+
+0.17.4 / 2013-09-12 
+==================
+
+ * update builder
+
 0.17.3 / 2013-09-06 
 ==================
 
