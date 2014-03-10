@@ -1,4 +1,28 @@
 
+0.19.7 / 2014-02-25
+==================
+
+ * update github URLs in package.js to https://raw.githubusercontent.com
+
+0.19.6 / 2014-02-06
+==================
+
+ * update component-installer to remove lowercasing
+ * update "superagent-proxy" to v0.3.0
+ * update "proxy-agent" to v1.1.0
+
+0.19.5 / 2014-01-16
+==================
+
+ * update installer for lookup casing fix
+ * fix casing in .lookup()
+
+0.19.4 / 2014-01-16
+==================
+
+ * update installer for casing fix
+ * update builder for casing fix
+
 0.19.3 / 2014-01-07
 ==================
 

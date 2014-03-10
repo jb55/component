@@ -202,7 +202,7 @@ does this component have html? yes
 
 ## Using private components
 
-  `component(1)` uses [~/.netrc](http://man.cx/netrc(4), like other tools such as [curl](http://man.cx/curl) and [git](http://git-scm.com/), to specify credentials for remote hosts. Simply create a `~/.netrc` file in the home directory:
+  `component(1)` uses [~/.netrc](http://man.cx/netrc(4)), like other tools such as [curl](http://man.cx/curl) and [git](http://git-scm.com/), to specify credentials for remote hosts. Simply create a `~/.netrc` file in the home directory:
 
 ```
 machine raw.github.com
@@ -259,7 +259,7 @@ $ make test
 
 (The MIT License)
 
-Copyright (c) 2012 TJ Holowaychuk &lt;tj@vision-media.ca&gt;
+Copyright (c) 2014 TJ Holowaychuk &lt;tj@vision-media.ca&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
