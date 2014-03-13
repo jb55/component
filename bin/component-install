@@ -78,6 +78,7 @@ var remotes = conf.remotes || [];
 if (program.dev) installer.development();
 if (program.proxy) installer.proxy(program.proxy);
 if (program.remotes) remotes = program.remotes.split(',').concat(conf.remotes);
+if (program.force) installer.force();
 
 remotes.forEach(function(remote) {
   installer.remote(remote);
@@ -136,18 +137,25 @@ function report(pkg) {
       report(dep);
     });
 
-    pkg.on('exists', function(dep){
-      log('exists', dep.slug);
-    });
-
     pkg.on('file', function(file){
       log('fetch', pkg.name + ':' + file);
     });
   }
 
+  pkg.on('exists', function(dep){
+    if (program.verbose){
+      log('exists', dep.slug);
+    }
+    saveToComponentJson();
+  });
+
   pkg.on('end', function(){
     log('complete', pkg.name);
 
+    saveToComponentJson();
+  });
+
+  function saveToComponentJson(){
     // save to ./component.json
     if (!local) {
       var key = program.dev ? 'development' : 'dependencies';
@@ -155,5 +163,5 @@ function report(pkg) {
       conf[key][pkg.name] = pkg.version === 'master' ? '*' : pkg.version;
       if (hasJson) write(json, JSON.stringify(conf, null, 2));
     }
-  });
+  }
 }
